@@ -1,8 +1,6 @@
 from . import db
 from datetime import datetime
-from flask_login import UserMixin
-
-
+# from flask_login import UserMixin
 
 
 class User(db.Model):
@@ -16,6 +14,7 @@ class User(db.Model):
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
+
     def __repr__(self):
         return f'User {self.username}'
 
