@@ -49,6 +49,17 @@ class Pitch(db.Model):
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_pitch(cls, id):
+        pitch = Pitch.query.filter_by(pitch_id=id).all()
+        return pitch.pitch_content
+
+        # return pitch
+
     def __repr__(self):
         return f'User {self.pitch_content}'
 
