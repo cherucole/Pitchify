@@ -23,14 +23,27 @@ def new_comment(id):
     pitch = get_pitch(id)
     if form.validate_on_submit():
         title = form.title.data
-        review = form.review.data
+        comment = form.comment.data
 
-        # Updated review instance
+        # Updated comment instance
         new_comment = Comment(pitch_id=pitch.id,pitch_title=title,pitch_comment=comment)
 
-        # save review method
+        # save comment method
         new_comment.save_comment()
         return redirect(url_for('.pitch',id = pitch.id ))
 
-    title = f'{movie.title} comment'
+    title = f'{comment.comment_content} comment'
     return render_template('new_comment.html',title = title, comment_form=form, pitch=pitch)
+
+
+@main.route('/pitch/<int:id>')
+def pitch(id):
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    pitch = get_pitch(id)
+    title = f'{pitch.title}'
+    comments = Comment.get_comments(pitch.id)
+
+    return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
