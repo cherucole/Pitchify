@@ -12,15 +12,32 @@ class User(db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    # bio = db.Column(db.String(255))
-    # profile_pic_path = db.Column(db.String())
-    # password_secure = db.Column(db.String(255))
-    # reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    password_secure = db.Column(db.String(255))
+    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
     def __repr__(self):
         return f'User {self.username}'
 
 
+class Comment(db.Model):
 
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer)
+    comment_content = db.Column(db.String)
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls, id):
+        comments = Comment.query.filter_by(pitch_id=id).all()
+        return comments
 
 class Pitch(db.Model):
 
