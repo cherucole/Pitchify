@@ -2,7 +2,10 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from config import config_options
 from flask_sqlalchemy import SQLAlchemy
+from flask_simplemde import SimpleMDE
 
+
+simple = SimpleMDE()
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -22,6 +25,8 @@ def create_app(config_name):
     # Initializing flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
+    simple.init_app(app)
+
 
 
     # Registering the blueprint

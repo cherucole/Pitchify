@@ -1,6 +1,7 @@
 from flask import render_template,request,redirect,url_for
 from ..models import Comment,User
 from . import main
+from .forms import CommentForm
 
 
 
@@ -16,7 +17,7 @@ def index():
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
 def new_comment(id):
     form = CommentForm()
-    pitch = get_pitch(id)
+    # pitch = get_pitch(id)
     if form.validate_on_submit():
         title = form.title.data
         comment = form.comment.data
@@ -28,8 +29,8 @@ def new_comment(id):
         new_comment.save_comment()
         return redirect(url_for('.pitch',id = pitch.id ))
 
-    title = f'{comment.comment_content} comment'
-    return render_template('new_comment.html',title = title, comment_form=form, pitch=pitch)
+    # title = f'{comment.comment_content} comment'
+    return render_template('new_comment.html', comment_form=form, pitch=pitch)
 
 
 @main.route('/pitch/<int:id>')
