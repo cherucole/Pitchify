@@ -17,6 +17,27 @@ def index():
     message= "Test Dynamic message by Cherucole"
     return render_template('index.html', message=message)
 
+
+
+
+
+
+@main.route('/category/<category>')
+def fetchcategory(category):
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    category = get_pitch(category)
+    print(category)
+    return render_template('pitch.html', category=category)
+
+
+
+
+
+
+
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
 def new_comment(id):
     form = CommentForm()

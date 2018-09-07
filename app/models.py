@@ -39,14 +39,6 @@ class Comment(db.Model):
         return comments
 
 class Pitch(db.Model):
-    # def __init__(self,id,pitch_id,pitch_title,pitch_content,posted,user_id):
-    #     self.id =id
-    #     self.title = pitch_id
-    #     self.pitch_title = pitch_title
-    #     self.pitch_content = pitch_content
-    #     self.posted = posted
-    #     self.user_id = user_id
-    #
 
     __tablename__ = 'pitches'
 
@@ -63,13 +55,13 @@ class Pitch(db.Model):
         db.session.commit()
 
     @classmethod
+    def get_pitch(cls, category):
+        pitch = Pitch.query.filter_by(category=category).all()
+        return pitch
+
     # def get_pitch(cls, id):
     #     pitch = Pitch.query.filter_by(pitch_id=id).all()
     #     return pitch
-
-    def get_pitch(cls, id):
-        pitch = Pitch.query.filter_by(pitch_id=id).all()
-        return pitch
 
         # return pitch
 
@@ -90,8 +82,8 @@ class Role(db.Model):
 
 
 
-def get_pitch(id):
-    pitch = Pitch.query.filter_by(id=id).all()
+def get_pitch(category):
+    pitch = Pitch.query.filter_by(pitch_category=category).all()
     return pitch
 
 
