@@ -27,7 +27,10 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://cherucole:cherucole@localhost/pitch'
+
     '''
+    
     Development  configuration child class
 
     Args:

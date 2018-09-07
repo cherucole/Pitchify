@@ -5,7 +5,8 @@ from .forms import CommentForm, PitchForm
 import markdown2
 
 
-
+def save_pitch(pitch):
+    Pitch.save_pitch(pitch)
 
 @main.route('/')
 def index():
@@ -38,24 +39,44 @@ def new_comment(id):
     return render_template('new_comment.html', comment_form=form, pitch=pitch,comment=comment)
 
 
-@main.route('/pitch/<int:id>')
-def pitch(id):
+@main.route('/pitch/', methods=['GET', 'POST'])
+def pitch():
 
     '''
     View pitch page function that returns the pitch details page and its data
     '''
-    pitch = get_pitch(id)
-    title = f'{pitch.title}'
-    comments = Comment.get_comments(pitch.id)
-
-    return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
-
-@main.route('/new_pitch/<int:id>')
-def single_pitch(id):
+    # pitch = get_pitch(id)
     form = PitchForm()
+    # title = f'{pitch.title}'
+    # comments = Comment.get_comments(pitch.id)
+    print('working')
+    if form.validate_on_submit():
+        title = form.title.data
+        content = form.content.data
 
-    pitch=Pitch.query.get(id)
-    # if pitch is None:
-    #     abort(404)
-    format_pitch = markdown2.markdown(" ",extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('new_pitch.html',pitch = pitch,format_pitch=format_pitch,pitch_form=form)
+
+
+
+        # Updated comment instance
+        new_pitch = Pitch( pitch_title=title,pitch_content=content)
+
+        # save comment method
+        save_pitch(new_pitch)
+        return redirect(url_for('.pitch',id = new_pitch.id ))
+
+    # title = f'{comment.comment_content} comment'
+
+    title = 'pitch'
+    return render_template('new_pitch.html', pitch_form=form)
+
+    # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
+
+# @main.route('/new_pitch/<int:id>')
+# def single_pitch():
+#     form = PitchForm()
+#
+#     pitch=Pitch.query.get(id)
+#     # if pitch is None:
+#     #     abort(404)
+#     format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
+#     return render_template('new_pitch.html',pitch = pitch,format_pitch=format_pitch,pitch_form=form)

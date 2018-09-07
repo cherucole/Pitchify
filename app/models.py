@@ -39,29 +39,41 @@ class Comment(db.Model):
         return comments
 
 class Pitch(db.Model):
+    # def __init__(self,id,pitch_id,pitch_title,pitch_content,posted,user_id):
+    #     self.id =id
+    #     self.title = pitch_id
+    #     self.pitch_title = pitch_title
+    #     self.pitch_content = pitch_content
+    #     self.posted = posted
+    #     self.user_id = user_id
+    #
 
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key=True)
-    # pitch_id = db.Column(db.Integer)
+    pitch_id = db.Column(db.Integer)
     pitch_title = db.Column(db.String)
     pitch_content = db.Column(db.String)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    pitch_comment = db.Column(db.String)
 
     def save_pitch(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_pitch(cls, id):
-        pitch = Pitch.query.filter_by(id=id).all()
-        return pitch.pitch_content
+    # def get_pitch(cls, id):
+    #     pitch = Pitch.query.filter_by(pitch_id=id).all()
+    #     return pitch
 
+    def get_pitch(cls, id):
+        pitch = Pitch.query.filter_by(pitch_id=id).all()
         return pitch
 
-    def __repr__(self):
-        return f'User {self.pitch_content}'
+        # return pitch
+
+    # def __repr__(self):
+    #     return f'User {self.pitch_content}'
 
 
 class Role(db.Model):
