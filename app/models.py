@@ -43,7 +43,7 @@ class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key=True)
-    pitch_id = db.Column(db.Integer)
+    # pitch_id = db.Column(db.Integer)
     pitch_title = db.Column(db.String)
     pitch_content = db.Column(db.String)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
@@ -55,10 +55,10 @@ class Pitch(db.Model):
 
     @classmethod
     def get_pitch(cls, id):
-        pitch = Pitch.query.filter_by(pitch_id=id).all()
+        pitch = Pitch.query.filter_by(id=id).all()
         return pitch.pitch_content
 
-        # return pitch
+        return pitch
 
     def __repr__(self):
         return f'User {self.pitch_content}'
@@ -74,3 +74,13 @@ class Role(db.Model):
 
     def __repr__(self):
         return f'User {self.name}'
+
+
+
+def get_pitch(id):
+    pitch = Pitch.query.filter_by(id=id).all()
+    return pitch
+
+
+def get_comments(id):
+    comments = Comment.query.filter_by(id=id).all()
