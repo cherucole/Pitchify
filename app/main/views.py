@@ -53,9 +53,10 @@ def pitch():
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
+        category=form.category.data
 
         # Updated comment instance
-        new_pitch = Pitch( pitch_title=title,pitch_content=content)
+        new_pitch = Pitch( pitch_title=title,pitch_content=content,pitch_category=category)
 
         # save comment method
         new_pitch.save_pitch()

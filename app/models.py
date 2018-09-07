@@ -54,6 +54,7 @@ class Pitch(db.Model):
     pitch_id = db.Column(db.Integer)
     pitch_title = db.Column(db.String)
     pitch_content = db.Column(db.String)
+    pitch_category=db.Column(db.String)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     pitch_comment = db.Column(db.String)
 
