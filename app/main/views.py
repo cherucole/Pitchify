@@ -54,14 +54,11 @@ def pitch():
         title = form.title.data
         content = form.content.data
 
-
-
-
         # Updated comment instance
         new_pitch = Pitch( pitch_title=title,pitch_content=content)
 
         # save comment method
-        save_pitch(new_pitch)
+        new_pitch.save_pitch()
         return redirect(url_for('.pitch',id = new_pitch.id ))
 
     # title = f'{comment.comment_content} comment'
@@ -70,6 +67,7 @@ def pitch():
     return render_template('new_pitch.html', pitch_form=form)
 
     # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
+
 
 # @main.route('/new_pitch/<int:id>')
 # def single_pitch():
