@@ -33,8 +33,12 @@ def fetchcategory(category):
     View pitch page function that returns the pitch details page and its data
     '''
     category = get_pitch(category)
+    # pitch = Pitch.query.get(id)
+    if request.args.get("vote"):
+        pitch.likes = pitch.likes + 1
+        pitch.save_pitch()
     print(category)
-    return render_template('pitch.html', category=category)
+    return render_template('pitch.html', category=category,pitch=pitch)
 
 
 
@@ -95,7 +99,6 @@ def pitch():
 
     title = 'pitch'
     return render_template('new_pitch.html', pitch_form=form)
-
 
     # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
 

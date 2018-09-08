@@ -2,14 +2,21 @@
 {% block content %}
 
 {% for item in category %}
-<div class="container-fluid">
+<!doctype html>
+<html lang="en">
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+  </head>
+  <body>
+  <br>
     <br>
-        <br>
 
-        <br>
     <br>
 
-<div class="card-deck">
+    <br>
+
+
+  <div class="card-deck">
   <div class="card">
   <div class="card-title">
     <h5>{{item.pitch_title}}</h5>
@@ -18,14 +25,17 @@
   <div class="card-body">
     <p>{{item.pitch_content}}</p>
   </div>
-                  <i class="fa fa-star-o"></i> {{ item.likes }}
+
+      <button>    <a href="/view/{{ item.id }}?vote=1"> Upvote
+</button>
+      <i class="fa fa-star-o"></i> {{ item.likes }}
+    </a>
+
 
 
 </div>
-
-</div>
-</div>
-
+  </body>
+</html>
 {% endfor %}
 {% endblock %}
 
