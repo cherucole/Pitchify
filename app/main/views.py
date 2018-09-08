@@ -96,6 +96,7 @@ def pitch():
     title = 'pitch'
     return render_template('new_pitch.html', pitch_form=form)
 
+
     # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
 
 
