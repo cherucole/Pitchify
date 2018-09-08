@@ -108,3 +108,14 @@ def pitch():
 #     #     abort(404)
 #     format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
 #     return render_template('new_pitch.html',pitch = pitch,format_pitch=format_pitch,pitch_form=form)
+
+
+@main.route("/view/<pitch_id>", methods=["GET","POST"])
+def view_pitch(pitch_id):
+    pitch = Pitch.query.get(pitch_id)
+    if request.args.get("vote"):
+       pitch.likes = pitch.likes + 1
+       pitch.save()
+       return redirect("/view/{pitch_id}".format(pitch_id=pitch_id))
+    # return render_template("view_pitch.html",{'pitch':pitch})
+    return render_template('view_pitch.html',pitch = pitch,)
