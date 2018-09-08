@@ -115,7 +115,7 @@ def view_pitch(id):
     pitch = Pitch.query.get(id)
     if request.args.get("vote"):
        pitch.likes = pitch.likes + 1
-       pitch.save()
+       pitch.save_pitch()
        return redirect("/view/{pitch_id}".format(pitch_id=id))
     # return render_template("view_pitch.html",{'pitch':pitch})
     return render_template('view_pitch.html',pitch = pitch,)
