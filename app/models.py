@@ -1,6 +1,9 @@
 from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
+from . import login_manager
+
 
 # from flask_login import UserMixin
 
@@ -12,14 +15,11 @@ class User(db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    bio = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
 
 
     pass_secure = db.Column(db.String(255))
-
 
     @property
     def password(self):
@@ -109,3 +109,8 @@ def get_pitch(category):
 
 def get_comments(id):
     comments = Comment.query.filter_by(id=id).all()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

@@ -2,6 +2,8 @@ from flask import render_template,request,redirect,url_for
 from ..models import Comment,User,Pitch,get_pitch,get_comments
 from . import main
 from .forms import CommentForm, PitchForm
+from flask_login import login_required
+
 import markdown2
 
 
@@ -23,6 +25,8 @@ def index():
 
 
 @main.route('/category/<category>')
+@login_required
+
 def fetchcategory(category):
 
     '''
@@ -39,6 +43,8 @@ def fetchcategory(category):
 
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+
 def new_comment(id):
     form = CommentForm()
     pitch = get_pitch(id)
@@ -61,6 +67,8 @@ def new_comment(id):
 
 
 @main.route('/pitch/', methods=['GET', 'POST'])
+@login_required
+
 def pitch():
 
     '''
