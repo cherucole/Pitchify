@@ -4,7 +4,6 @@ from . import main
 from .forms import CommentForm, PitchForm,UpdateProfile
 from flask_login import login_required, current_user
 from .. import db,photos
-
 import markdown2
 
 
@@ -17,10 +16,7 @@ def index():
     my index page
     :return:
     '''
-    # message= "To view select any category"
     return render_template('index.html', )
-
-
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -73,17 +69,11 @@ def fetchcategory(category):
     View pitch page function that returns the pitch details page and its data
     '''
     category = get_pitch(category)
-    # pitch = Pitch.query.get(id)
     if request.args.get("vote"):
         pitch.likes = pitch.likes + 1
         pitch.save_pitch()
     print(category)
     return render_template('pitch.html', category=category,pitch=pitch)
-
-
-
-
-
 
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
@@ -104,9 +94,6 @@ def new_comment(id):
         # save comment method
         new_comment.save_comment()
         return redirect(url_for('.pitch',id = pitch.id ))
-
-    # title = f'{comment.comment_content} comment'
-
     title = 'comment'
     return render_template('new_comment.html', comment_form=form, pitch=pitch,comment=comment)
 
@@ -119,11 +106,7 @@ def pitch():
     '''
     View pitch page function that returns the pitch details page and its data
     '''
-    # pitch = get_pitch(id)
     form = PitchForm()
-    # pitch=get_pitch(id)
-    # title = f'{pitch.title}'
-    # comments = Comment.get_comments(pitch.id)
     print('working')
     if form.validate_on_submit():
         title = form.title.data
@@ -137,26 +120,16 @@ def pitch():
         new_pitch.save_pitch()
         return redirect(url_for('.single_pitch',id = new_pitch.id ))
 
-    # title = f'{comment.comment_content} comment'
-
     title = 'pitch'
     return render_template('new_pitch.html', pitch_form=form)
 
-    # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
 
 
 @main.route('/pitch/<int:id>')
 def single_pitch(id):
     pitches = Pitch.query.get(id)
-
-    # pitches=Pitch.get_pitch(pitch.id)
-    # pitch=Pitch.query.get(id)
-    # if pitch is None:
-    #     abort(404)
     return render_template('added_pitch.html',pitch = pitches)
-    # return render_template('added_pitch.html',pitch = pitch,format_pitch=format_pitch)
 
-    # return redirect("/view/{pitch_id}".format(pitch_id=id))
 
 
 @main.route("/view/<id>", methods=["GET","POST"])
