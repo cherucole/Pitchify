@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,19 +14,38 @@
 
     <br>
 
-<button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
-
-    <a href="/view/{{ pitch.id }}?vote=1">
-      <i class="fa fa-star-o"></i> {{ pitch.likes }}
-    </a>
+  <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
     <br>
-  <h1>    {{ pitch.pitch_title }}
-</h1>
-  <h2>
-      {{pitch.pitch_content}}
-  </h2>
+    <br>
+
+
+   <div class="card border-secondary mb-3" style="max-width: 18rem;">
+   <div class="card-header"><h5>{{ pitch.pitch_title }}</h5>
+
+  </div>
+
+   <div class="card-body text-secondary">
+    <!--<h5 class="card-title">Secondary card title</h5>-->
+    <p class="card-text">{{pitch.pitch_content}}</p>
+
+       <a href="/view/{{ pitch.id }}?vote=1" class="btn btn-primary">Upvote</a>
+
+
+
+
+      {{ pitch.likes }} Likes
+   <br>
+
+
+  </div>
+
+            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
+
+</div>
 
 
 
   </body>
 </html>
+
+{% endblock %}
