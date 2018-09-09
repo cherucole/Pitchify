@@ -15,30 +15,37 @@
     <br>
 
 <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
+  <br>
+      <br>
+
+  <div class="card-columns">
+
 {% for item in category %}
 
-  <div class="card-deck">
-  <div class="card">
-  <div class="card-title">
-    <h5>{{item.pitch_title}}</h5>
+ <div class="card border-secondary mb-3" style="max-width: 18rem;">
+   <div class="card-header"><h5>{{item.pitch_title}}</h5></div>
 
-  </div>
-  <div class="card-body">
-    <p>{{item.pitch_content}}</p>
+
+   <div class="card-body text-secondary">
+    <!--<h5 class="card-title">Secondary card title</h5>-->
+    <p class="card-text">{{item.pitch_content}}</p>
   </div>
 
-      <button>    <a href="/view/{{ item.id }}?vote=1"> Upvote
-</button>
-      <i class="fa fa-star-o"></i> {{ item.likes }}
+       <a href="/view/{{ item.id }}?vote=1" class="btn btn-primary">Upvote</a>
+
+
+
+
+      {{ item.likes }}<i class="fa fa-star-o"></i>
     </a>
+   <br>
 
-
+            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{item.pitch_category}} </cite></footer>
 
 </div>
   </body>
 </html>
 {% endfor %}
 {% endblock %}
-
 
 
