@@ -135,7 +135,7 @@ def pitch():
 
         # save comment method
         new_pitch.save_pitch()
-        return redirect(url_for('.pitch',id = new_pitch.id ))
+        return redirect(url_for('.single_pitch',id = new_pitch.id ))
 
     # title = f'{comment.comment_content} comment'
 
@@ -147,11 +147,14 @@ def pitch():
 
 @main.route('/pitch/<int:id>')
 def single_pitch(id):
-    pitch=Pitch.query.get(id)
-    if pitch is None:
-        abort(404)
-    format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('added_pitch.html',pitch = pitch,format_pitch=format_pitch)
+    pitches = Pitch.query.get(id)
+
+    # pitches=Pitch.get_pitch(pitch.id)
+    # pitch=Pitch.query.get(id)
+    # if pitch is None:
+    #     abort(404)
+    return render_template('added_pitch.html',pitch = pitches)
+    # return render_template('added_pitch.html',pitch = pitch,format_pitch=format_pitch)
 
     # return redirect("/view/{pitch_id}".format(pitch_id=id))
 
