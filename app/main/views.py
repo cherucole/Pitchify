@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from ..models import Comment,User,Pitch,get_pitch,get_comments
 from . import main
 from .forms import CommentForm, PitchForm,UpdateProfile
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .. import db,photos
 
 import markdown2
@@ -95,10 +95,11 @@ def new_comment(id):
     # comment=get_comments(id)
     if form.validate_on_submit():
         title = form.title.data
+        content=form.content.data
         comment = form.comment.data
 
         # Updated comment instance
-        new_comment = Comment(pitch_id=pitch.id, pitch_title=title,pitch_comment=comment)
+        new_comment = Comment(pitch_id=pitch.id, pitch_title=title,pitch_comment=comment,pitch_content=content,user=current_user)
 
         # save comment method
         new_comment.save_comment()
@@ -143,15 +144,13 @@ def pitch():
     # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
 
 
-# @main.route('/new_pitch/<int:id>')
-# def single_pitch():
-#     form = PitchForm()
-#
-#     pitch=Pitch.query.get(id)
-#     # if pitch is None:
-#     #     abort(404)
-#     format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
-#     return render_template('new_pitch.html',pitch = pitch,format_pitch=format_pitch,pitch_form=form)
+@main.route('/pitch/<id>')
+def single_pitch(id):
+    pitch=Pitch.query.get(id)
+    if pitch is None:
+        abort(404)
+    format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('added_pitch.html',pitch = pitch,format_pitch=format_pitch)
 
 
 @main.route("/view/<id>", methods=["GET","POST"])
