@@ -139,5 +139,4 @@ def view_pitch(id):
        pitch.likes = pitch.likes + 1
        pitch.save_pitch()
        return redirect("/view/{pitch_id}".format(pitch_id=id))
-    # return render_template("view_pitch.html",{'pitch':pitch})
     return render_template('view_pitch.html',pitch = pitch,)
