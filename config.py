@@ -5,6 +5,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://cherucole:cherucole@localhost/pitch'
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
     MAIL_SERVER = 'smtp.googlemail.com'
