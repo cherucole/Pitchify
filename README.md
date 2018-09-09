@@ -3,13 +3,13 @@
 ![Hacker News API](http://www.nigeriagoodnews.com/wp-content/uploads/2014/11/pitch-your-ideas.png)
 
 
-#### 5th-September-2018
+#### 9th-September-2018
 
 #### By **Cherucole**
 
 ## Description
 
-Unofficial News App through News API for [News API](https://newsapi.org/).
+A way for users to submit one minute pitches depending on the category they like.
 The app is live here [News.io](https://news-io.herokuapp.com/).
 
 ## Getting Started

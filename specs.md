@@ -8,9 +8,9 @@ Features
 ========
 
 - Built with Python 3 (3.7+) and Flask
-- Shows 'news sources', 'news articles','categories' and sorted by relevancy
+- Shows 'pitches','categories' and sorted by post date
 - Styled using Bootstrap
-- Handles external get posts and requests from API
+- Handles external get posts and requests from database
 - Get news articles from several sources (`choose from landing page`)
 
 
@@ -35,37 +35,35 @@ Usage
 API Object Reference
 ========
 
-## Classes: `Sources, Articles`
+## Classes: `user, Pitch`
 
 
 **Arguments:**
 
 | Name | Type | Required | Description | Default |
 | ---- | ---- | -------- | ----------- | ------- |
-| `category` | string | No | Returns the articles from this topic only and sorted by relevancy. | `(empty string)`  |
-| `news_source` | integer | No | Returns the articles from this news source only. | `(user's choice)` |
+| `pitch` | string | No | pitches from this category only and sorted by relevancy. | `(empty string)`  |
+| `user` | integer | No | Returns the user from this database source only. | `(user's choice)` |
 
 
 
-## Class: `Sources`
+## Class: `Pitches`
 
-Each `Sources` has the following properties
+Each `Pitch` has the following properties
 
-- **name** - news source name
+- **title** - pitch name
 - **id** - news source unique id
-- **description** - info about the news source
-- **url** - official website link to news source
+- **content** - the pitch content
+- **pot date** - official website link to news source
 
-## Class: `Article`
+## Class: `User`
 
-Each `Article` has the following properties
+Each `User` has the following properties
 
 - **id** - unique id of the article
-- **title** - the title of the article itself
-- **description** - the article itself and what it is about
-- **published time** - time when it was submitted
-- **image url** - image url for image tags
-- **url** - url to website for full article
+- **username** - name stored on database
+- **email** - user email
+- **image url** - profile picture for user
 
 Tests
 ========
@@ -73,7 +71,7 @@ Tests
 To run the tests locally just do:
 
     $ cd app
-    $ python3.7 classes_test.py
+    $ python3.7 test_users.py
 
 
 The tests are run on a local test server.
