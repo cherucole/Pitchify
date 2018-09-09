@@ -17,8 +17,8 @@ def index():
     my index page
     :return:
     '''
-    message= "Test Dynamic message by Cherucole"
-    return render_template('index.html', message=message)
+    # message= "To view select any category"
+    return render_template('index.html', )
 
 
 
