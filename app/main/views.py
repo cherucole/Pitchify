@@ -121,6 +121,7 @@ def pitch():
     '''
     # pitch = get_pitch(id)
     form = PitchForm()
+    # pitch=get_pitch(id)
     # title = f'{pitch.title}'
     # comments = Comment.get_comments(pitch.id)
     print('working')
@@ -144,13 +145,15 @@ def pitch():
     # return render_template('pitch.html',title = title,pitch = pitch,comments = comments)
 
 
-@main.route('/pitch/<id>')
+@main.route('/pitch/<int:id>')
 def single_pitch(id):
     pitch=Pitch.query.get(id)
     if pitch is None:
         abort(404)
     format_pitch = markdown2.markdown(pitch.pitch_content,extras=["code-friendly", "fenced-code-blocks"])
     return render_template('added_pitch.html',pitch = pitch,format_pitch=format_pitch)
+
+    # return redirect("/view/{pitch_id}".format(pitch_id=id))
 
 
 @main.route("/view/<id>", methods=["GET","POST"])
