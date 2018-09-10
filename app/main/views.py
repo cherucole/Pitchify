@@ -1,5 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
-from ..models import Comment,User,Pitch,get_pitch,get_comments
+from ..models import Comment,User,Pitch
+# ,get_pitch,get_comments
 from . import main
 from .forms import CommentForm, PitchForm,UpdateProfile
 from flask_login import login_required, current_user
@@ -68,7 +69,7 @@ def fetchcategory(category):
     '''
     View pitch page function that returns the pitch details page and its data
     '''
-    category = get_pitch(category)
+    category = Pitch.get_pitch(category)
     if request.args.get("vote"):
         pitch.likes = pitch.likes + 1
         pitch.save_pitch()
@@ -81,7 +82,7 @@ def fetchcategory(category):
 
 def new_comment(id):
     form = CommentForm()
-    pitch = get_pitch(id)
+    pitch = Pitch.get_pitch(id)
     # comment=get_comments(id)
     if form.validate_on_submit():
         title = form.title.data
