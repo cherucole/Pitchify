@@ -1,7 +1,7 @@
 ![News.io App](https://support.apple.com/library/content/dam/edam/applecare/images/en_US/mac_apps/itunes/iphone7-ipad-use-news-hero.jpg)
 
-Unofficial News App through News API for [News API](https://newsapi.org/).
-The app is live here [News.io](https://news-io.herokuapp.com/).
+A way for users to submit one minute pitches depending on the category they like.
+The app is live here [Pitchify-pro](https://pitchify-pro.herokuapp.com/).
 
 
 Features

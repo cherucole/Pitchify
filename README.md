@@ -1,6 +1,6 @@
 # Pitchify App
 
-![Hacker News API](http://www.nigeriagoodnews.com/wp-content/uploads/2014/11/pitch-your-ideas.png)
+![pitchify-pro](http://www.nigeriagoodnews.com/wp-content/uploads/2014/11/pitch-your-ideas.png)
 
 
 #### 9th-September-2018
@@ -10,7 +10,7 @@
 ## Description
 
 A way for users to submit one minute pitches depending on the category they like.
-The app is live here [News.io](https://news-io.herokuapp.com/).
+The app is live here [Pitchify-pro](https://pitchify-pro.herokuapp.com/).
 
 ## Getting Started
 
