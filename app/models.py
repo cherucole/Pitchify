@@ -4,7 +4,9 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 # from flask_login import UserMixin
 
 
@@ -85,15 +87,12 @@ class Pitch(db.Model):
 
 
 
-def get_pitch(category):
-    pitch = Pitch.query.filter_by(pitch_category=category).all()
-    return pitch
+# def get_pitch(category):
+#     pitch = Pitch.query.filter_by(pitch_category=category).all()
+#     return pitch
 
 
-def get_comments(id):
-    comments = Comment.query.filter_by(id=id).all()
+# def get_comments(id):
+#     comments = Comment.query.filter_by(id=id).all()
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
