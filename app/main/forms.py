@@ -3,9 +3,7 @@ from wtforms import StringField,TextAreaField,SubmitField,SelectField
 from wtforms.validators import Required
 
 class CommentForm(FlaskForm):
-
-    # title = StringField('Review title',validators=[Required()])
-    comment = TextAreaField('Your Comment')
+    comment = TextAreaField('Your comment...',validators = [Required()])
     submit = SubmitField('Submit')
 
 
@@ -19,3 +17,4 @@ class PitchForm(FlaskForm):
     category = SelectField(u'Pitch Category', choices=[('brainy', 'brainy'), ('poetry', 'poetry'), ('funny', 'funny'),('pickup_lines', 'pickup_lines')])
     content = TextAreaField('Pitch Body')
     submit = SubmitField('Submit')
+

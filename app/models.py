@@ -19,10 +19,8 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
-    # comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"))
-
+    pitches = db.relationship('Pitch',backref = 'username',lazy = "dynamic")
     comments = db.relationship('Comment',backref = 'username',lazy = "dynamic")
-    # pitch = db.relationship('Comment',backref = 'username',lazy = "dynamic")
 
 
     pass_secure = db.Column(db.String(255))
@@ -59,7 +57,7 @@ class Comment(db.Model):
 
     @classmethod
     def get_comments(cls, id):
-        comments = Comment.query.filter_by(pitch_id=id).all()
+        comments = Comment.query.filter_by(pitches_id=id).all()
         return comments
 
 class Pitch(db.Model):
@@ -73,7 +71,7 @@ class Pitch(db.Model):
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     likes=db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    comments = db.relationship('Comment',backref = 'pitch_content',lazy = "dynamic")
+    comments = db.relationship('Comment',backref = "pitch_content",lazy = "dynamic")
 
 
     def save_pitch(self):

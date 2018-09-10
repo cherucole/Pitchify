@@ -76,37 +76,34 @@ def fetchcategory(category):
     print(category)
     return render_template('pitch.html', category=category,pitch=pitch)
 
-
-@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@main.route('/comments/<id>')
 @login_required
+def comment(id):
+    comment =Comment.get_comments(id)
+    print(comment)
+    title = 'comments'
+    return render_template('comments.html',comments = comment,title = title)
 
-def new_comment(id):
+@main.route('/comment/<int:pitches_id>', methods = ['GET', 'POST'])
+@login_required
+def new_comment(pitches_id):
+    pitches = Pitch.query.filter_by(id = pitches_id).first()
     form = CommentForm()
-    pitch = Pitch.get_pitch(id)
-    # comment=get_comments(id)
+
     if form.validate_on_submit():
-        title = form.title.data
-        content=form.content.data
         comment = form.comment.data
 
-        # Updated comment instance
-        new_comment = Comment(pitch_id=pitch.id, pitch_title=title,pitch_comment=comment,pitch_content=content,user=current_user)
+        new_comment = Comment(comment_content=comment,user_id=current_user.id, pitches_id=pitches_id)
 
-        # save comment method
         new_comment.save_comment()
-        return redirect(url_for('.pitch',id = pitch.id ))
-    title = 'comment'
-    return render_template('new_comment.html', comment_form=form, pitch=pitch,comment=comment)
 
+        return redirect(url_for('main.index'))
+    title='New Pitch'
+    return render_template('new_comment.html',title=title,comment_form = form,pitches_id=pitches_id)
 
 @main.route('/pitch/', methods=['GET', 'POST'])
 @login_required
-
 def pitch():
-
-    '''
-    View pitch page function that returns the pitch details page and its data
-    '''
     form = PitchForm()
     print('working')
     if form.validate_on_submit():
@@ -115,7 +112,7 @@ def pitch():
         category=form.category.data
 
         # Updated comment instance
-        new_pitch = Pitch( pitch_title=title,pitch_content=content,pitch_category=category)
+        new_pitch = Pitch( pitch_title=title,pitch_content=content,pitch_category=category,user_id=current_user.id)
 
         # save comment method
         new_pitch.save_pitch()
@@ -126,10 +123,22 @@ def pitch():
 
 
 
-@main.route('/pitch/<int:id>')
+@main.route('/pitch/<int:id>',methods=["GET","POST"])
 def single_pitch(id):
     pitches = Pitch.query.get(id)
-    return render_template('added_pitch.html',pitch = pitches)
+
+    form =CommentForm()
+    if form.validate_on_submit():
+        comment=form.comment.data
+
+
+        new_comment = Comment(comment_content=comment,user_id=current_user.id, id=id)
+
+        new_comment.save_comment()
+        return redirect(url_for('.view_pitch', id=pitches.id))
+
+
+    return render_template('added_pitch.html',pitch = pitches,form=form)
 
 
 
@@ -141,3 +150,6 @@ def view_pitch(id):
        pitch.save_pitch()
        return redirect("/view/{pitch_id}".format(pitch_id=id))
     return render_template('view_pitch.html',pitch = pitch,)
+
+
+
