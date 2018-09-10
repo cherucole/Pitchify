@@ -19,7 +19,7 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "watchlist login"
+    title = "pitch login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 
@@ -30,7 +30,7 @@ def register():
         user = User(email = form.email.data, username = form.username.data,password = form.password.data)
         db.session.add(user)
         db.session.commit()
-        mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to Pitchify","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
         title = "New Account"
