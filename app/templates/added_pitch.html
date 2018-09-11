@@ -45,25 +45,18 @@
 
             <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
 
-</div> test display
-{{pitch.comments.comment_content}}
-      {{pitch.username}}
 </div>
-<div class="container">
-   <br>
-        <br>
-
-        <br>
-
-
-
-  {{wtf.quick_form(form)}}
-</div>
+        {{wtf.quick_form(form)}}
+      <br>
+ <h3>Comments</h3>
 {% for comment in comments%}
 
-  <p> {{comment.comment_content}}</p>
+  <p> {{comment.comment_content}} : by {{comment.username}}</p>
+
 
   {% endfor %}
+
+</div>
   </body>
 </html>
 
