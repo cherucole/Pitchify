@@ -79,10 +79,10 @@ def fetchcategory(category):
 @main.route('/comments/<id>')
 @login_required
 def comment(id):
-    comment =Comment.get_comments(id)
+    comments =Comment.get_comments(id)
     print(comment)
     title = 'comments'
-    return render_template('comments.html',comments = comment,title = title)
+    return render_template('comments.html',comments = comments,title = title)
 
 @main.route('/comment/<int:pitches_id>', methods = ['GET', 'POST'])
 @login_required
@@ -132,13 +132,20 @@ def single_pitch(id):
         comment=form.comment.data
 
 
-        new_comment = Comment(comment_content=comment,user_id=current_user.id, id=id)
+        new_comment = Comment(comment_content=comment,
+                              user_id=current_user.id,
+                              id=id)
 
-        new_comment.save_comment()
-        return redirect(url_for('.view_pitch', id=pitches.id))
 
+        db.session.add(new_comment)
+        db.session.commit()
 
-    return render_template('added_pitch.html',pitch = pitches,form=form)
+    comments = Comment.query.all()
+        # new_comment.save_comment()
+
+        # return redirect(url_for('.view_pitch', id=pitches.id, comments=comments))
+
+    return render_template('added_pitch.html',pitch = pitches,form=form, comments=comments)
 
 
 
@@ -149,7 +156,7 @@ def view_pitch(id):
        pitch.likes = pitch.likes + 1
        pitch.save_pitch()
        return redirect("/view/{pitch_id}".format(pitch_id=id))
-    return render_template('view_pitch.html',pitch = pitch,)
+    return render_template('view_pitch.html',pitch = pitch, comment=comment)
 
 
 

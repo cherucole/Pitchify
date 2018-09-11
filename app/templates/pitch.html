@@ -51,6 +51,17 @@
     {% endfor %}
 
     </div>
+          {% for single in comment_content %}
+<div class="card">
+  <div class="card-title">
+    <h5>{{single.username}}</h5> test display
+  </div>
+  <div class="card-body">
+      <p>{{single.comment_content}}</p>
+  </div>
+</div>
+{% endfor %}
+
           </div>
 
 {% endblock %}
