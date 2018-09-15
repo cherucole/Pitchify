@@ -156,7 +156,7 @@ def pitch_comments(pitch_id):
 
     pitch = Pitch.query.filter_by(id=pitch_id).one()
     # comments=Comment.get_comments(pitch_id)
-    comments=Comment.query.all()
+    comments=Comment.get_comments(pitch_id)
 
 
     return render_template('pitch_comments.html', pitch=pitch, comments=comments, pitch_id=pitch.id)
