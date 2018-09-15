@@ -19,8 +19,8 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
-    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
-    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
+    pitches = db.relationship('Pitch',backref = 'username',lazy = "dynamic")
+    comments = db.relationship('Comment',backref = 'username',lazy = "dynamic")
 
 
     pass_secure = db.Column(db.String(255))

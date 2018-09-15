@@ -68,13 +68,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
+              Pitch Content:
+              <br>
+              <br>
             {{ pitch.pitch_content|safe }}
           </div>
         </div>
       </div>
     </article>
-
+<br>
 <div class="container">
+    <h4>Comments</h4>
 
       {% for comment in comments %}
 <div class="card">
