@@ -1,5 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from ..models import Comment,User,Pitch
+# We may also use the import * command to import all objects from a specific module e.g from ..models import *
 # ,get_pitch,get_comments
 from . import main
 from .forms import CommentForm, PitchForm,UpdateProfile
@@ -13,11 +14,12 @@ def save_pitch(pitch):
 
 @main.route('/')
 def index():
+    pitches = Pitch.query.order_by(Pitch.posted.desc()).all()
     '''
     my index page
     :return:
     '''
-    return render_template('index.html', )
+    return render_template('index.html', pitches=pitches )
 
 @main.route('/user/<uname>')
 def profile(uname):

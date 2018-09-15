@@ -24,6 +24,43 @@
 <button type="button" class="btn btn-outline-warning"><a href="/category/pickup_lines">Pickup Lines</a></button>
 
 
+    <br>
+        <hr>
+
+        <br>
+
+
+      <div class="card-columns">
+
+{% for item in pitches %}
+
+ <div class="card border-secondary">
+   <div class="card-header"><h5>{{item.pitch_title}}</h5></div>
+
+
+   <div class="card-body text-secondary">
+    <!--<h5 class="card-title">Secondary card title</h5>-->
+    <p class="card-text">{{item.pitch_content}}</p>
+  </div>
+
+       <a href="/view/{{ item.id }}" class="btn btn-primary">Upvote</a>
+
+
+        <button type="button" class="btn btn-outline-primary"><a href="/pitch/{{item.id}}">Comment</a></button>
+
+
+      {{ item.likes }}<i class="fa fa-star-o"></i>
+    </a>
+   <br>
+
+            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{item.pitch_category}} </cite></footer>
+
+</div>
+    {% endfor %}
+
+    </div>
+
+
 
 
 <!--<div class="container">-->
