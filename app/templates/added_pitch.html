@@ -49,12 +49,25 @@
         {{wtf.quick_form(form)}}
       <br>
  <h3>Comments</h3>
-{% for comment in comments%}
 
-  <p> {{comment.comment_content}} : by {{comment.username}}</p>
+      {% for comment in comments %}
+<div class="card">
+      <div class="card-header">
+    {{comment.username}}
+  </div>
 
+  <div class="card-body">
+          <blockquote class="blockquote mb-0">
 
-  {% endfor %}
+            <p> {{comment.comment_content}} </p>
+              <footer class="blockquote-footer">posted on <cite title="Source Title">{{comment.posted.strftime('%B %d, %Y')}}</cite></footer>
+
+    </blockquote>
+
+  </div>
+</div>
+    <br>
+{% endfor %}
 
 </div>
   </body>
