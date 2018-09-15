@@ -13,6 +13,7 @@ def save_pitch(pitch):
     Pitch.save_pitch(pitch)
 
 @main.route('/')
+
 def index():
     pitches = Pitch.query.order_by(Pitch.posted.desc()).all()
     '''
@@ -126,6 +127,8 @@ def pitch():
 
 
 @main.route('/pitch/<int:pitch_id>',methods=["GET","POST"])
+@login_required
+
 def single_pitch(pitch_id):
     pitches = Pitch.query.filter_by(id=pitch_id).one()
 
@@ -152,6 +155,8 @@ def single_pitch(pitch_id):
 
 
 @main.route('/pitch_comments/<int:pitch_id>' ,methods=['GET', 'POST'])
+@login_required
+
 def pitch_comments(pitch_id):
 
     pitch = Pitch.query.filter_by(id=pitch_id).one()
@@ -164,6 +169,8 @@ def pitch_comments(pitch_id):
 
 
 @main.route("/view/<id>", methods=["GET","POST"])
+@login_required
+
 def view_pitch(id):
     pitch = Pitch.query.get(id)
     if request.args.get("vote"):
