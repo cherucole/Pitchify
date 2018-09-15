@@ -125,29 +125,39 @@ def pitch():
 
 
 
-@main.route('/pitch/<int:id>',methods=["GET","POST"])
-def single_pitch(id):
-    pitches = Pitch.query.get(id)
+@main.route('/pitch/<int:pitch_id>',methods=["GET","POST"])
+def single_pitch(pitch_id):
+    pitches = Pitch.query.filter_by(id=pitch_id).one()
+
+    comments=Comment.get_comments(pitch_id)
+
 
     form =CommentForm()
     if form.validate_on_submit():
         comment=form.comment.data
 
 
-        new_comment = Comment(comment_content=comment,
-                              user_id=current_user.id,
-                              id=id)
-
+        new_comment = Comment(comment_content=comment,user_id=current_user.id, pitch_id=pitch_id)
 
         db.session.add(new_comment)
         db.session.commit()
+        return redirect(url_for('main.pitch_comments', pitch_id=pitch.id))
 
-    comments = Comment.query.all()
+
         # new_comment.save_comment()
 
         # return redirect(url_for('.view_pitch', id=pitches.id, comments=comments))
 
     return render_template('added_pitch.html',pitch = pitches,form=form, comments=comments)
+
+
+@main.route('/pitch_comments/<int:pitch_id>' ,methods=['GET', 'POST'])
+def pitch_comments(pitch_id):
+
+    pitch = Pitch.query.filter_by(id=pitch_id).one()
+    comments=Comment.get_comments(pitch_id)
+
+    return render_template('pitch_comments.html', pitch=pitch, comments=comments, pitch_id=pitch.id)
 
 
 
