@@ -118,7 +118,7 @@ def pitch():
 
         # save comment method
         new_pitch.save_pitch()
-        return redirect(url_for('.single_pitch',id = new_pitch.id ))
+        return redirect(url_for('.single_pitch',pitch_id = new_pitch.id ))
 
     title = 'pitch'
     return render_template('new_pitch.html', pitch_form=form)
