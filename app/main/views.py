@@ -141,7 +141,7 @@ def single_pitch(pitch_id):
 
         db.session.add(new_comment)
         db.session.commit()
-        return redirect(url_for('main.pitch_comments', pitch_id=pitch.id))
+        return redirect(url_for('main.pitch_comments', pitch_id=pitches.id))
 
 
         # new_comment.save_comment()
@@ -155,7 +155,9 @@ def single_pitch(pitch_id):
 def pitch_comments(pitch_id):
 
     pitch = Pitch.query.filter_by(id=pitch_id).one()
-    comments=Comment.get_comments(pitch_id)
+    # comments=Comment.get_comments(pitch_id)
+    comments=Comment.query.all()
+
 
     return render_template('pitch_comments.html', pitch=pitch, comments=comments, pitch_id=pitch.id)
 
