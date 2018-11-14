@@ -3,70 +3,65 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
-  </head>
-  <body>
-      <div class="container">
 
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
 
-  <br>
-    <br>
+<body>
+  <div class="container">
 
     <br>
-
+    <br>
+    <br>
     <br>
 
+    <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
+    <br>
+    <br>
 
-<button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
-  <br>
-      <br>
+    <div class="card-columns">
 
-  <div class="card-columns">
+      {% for item in category %}
 
-{% for item in category %}
+      <div class="card border-secondary">
+        <div class="card-header">
+          <h5>{{item.pitch_title}}</h5>
+        </div>
 
- <div class="card border-secondary">
-   <div class="card-header"><h5>{{item.pitch_title}}</h5></div>
+        <div class="card-body text-secondary">
+          <p class="card-text">{{item.pitch_content}}</p>
+        </div>
 
-
-   <div class="card-body text-secondary">
-    <!--<h5 class="card-title">Secondary card title</h5>-->
-    <p class="card-text">{{item.pitch_content}}</p>
-  </div>
-
-       <a href="/view/{{ item.id }}" class="btn btn-primary">Upvote</a>
-
+        <a href="/view/{{ item.id }}" class="btn btn-primary">Upvote</a>
 
         <button type="button" class="btn btn-outline-primary"><a href="/pitch/{{item.id}}">Comment</a></button>
 
+        {{ item.likes }}<i class="fa fa-star-o"></i>
+        </a>
+        <br>
 
-      {{ item.likes }}<i class="fa fa-star-o"></i>
-    </a>
-   <br>
+        <footer class="blockquote-footer"> <cite title="Source Title">Category: {{item.pitch_category}} </cite></footer>
 
-            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{item.pitch_category}} </cite></footer>
-
-</div>
-    {% endfor %}
+      </div>
+      {% endfor %}
 
     </div>
-          {% for single in comment_content %}
-<div class="card">
-  <div class="card-title">
-    <h5>{{single.username}}</h5> test display
+    {% for single in comment_content %}
+    <div class="card">
+      <div class="card-title">
+        <h5>{{single.username}}</h5> test display
+      </div>
+      <div class="card-body">
+        <p>{{single.comment_content}}</p>
+      </div>
+    </div>
+    {% endfor %}
+
   </div>
-  <div class="card-body">
-      <p>{{single.comment_content}}</p>
-  </div>
-</div>
-{% endfor %}
 
-          </div>
+  {% endblock %}
 
-{% endblock %}
+</body>
 
-  </body>
 </html>
-
-

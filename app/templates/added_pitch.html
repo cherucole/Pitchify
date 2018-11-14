@@ -6,71 +6,73 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
-  </head>
-  <body>
+
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
   <div class="container">
-  <br>
+    <br>
+    <br>
+
     <br>
 
     <br>
 
-    <br>
-
-  <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
+    <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
     <br>
     <br>
 
 
-   <div class="card border-secondary mb-3" style="max-width: 180rem;">
-   <div class="card-header"><h5>{{ pitch.pitch_title }}</h5>
-
-  </div>
-
-   <div class="card-body text-secondary">
-    <!--<h5 class="card-title">Secondary card title</h5>-->
-    <p class="card-text">{{pitch.pitch_content}}</p>
-
-       <a href="/view/{{ pitch.id }}?vote=1" class="btn btn-primary">Upvote</a>
-
-
-
-
-      {{ pitch.likes }} Likes
-   <br>
-
-{{username}}
-  </div>
-
-            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
-
-</div>
-        {{wtf.quick_form(form)}}
-      <br>
- <h3>Comments</h3>
-
-      {% for comment in comments %}
-<div class="card">
+    <div class="card border-secondary mb-3" style="max-width: 180rem;">
       <div class="card-header">
-    {{comment.username}}
-  </div>
+        <h5>{{ pitch.pitch_title }}</h5>
 
-  <div class="card-body">
-          <blockquote class="blockquote mb-0">
+      </div>
 
-            <p> {{comment.comment_content}} </p>
-              <footer class="blockquote-footer">posted on <cite title="Source Title">{{comment.posted.strftime('%B %d, %Y')}}</cite></footer>
+      <div class="card-body text-secondary">
+        <!--<h5 class="card-title">Secondary card title</h5>-->
+        <p class="card-text">{{pitch.pitch_content}}</p>
 
-    </blockquote>
+        <a href="/view/{{ pitch.id }}?vote=1" class="btn btn-primary">Upvote</a>
 
-  </div>
-</div>
+        {{ pitch.likes }} Likes
+        <br>
+
+        {{username}}
+      </div>
+
+      <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
+
+    </div>
+    {{wtf.quick_form(form)}}
     <br>
-{% endfor %}
+    <h3>Comments</h3>
 
-</div>
-  </body>
+    {% for comment in comments %}
+    <div class="card">
+      <div class="card-header">
+        {{comment.username}}
+      </div>
+
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+
+          <p> {{comment.comment_content}} </p>
+          <footer class="blockquote-footer">posted on <cite title="Source Title">{{comment.posted.strftime('%B %d,
+              %Y')}}</cite></footer>
+
+        </blockquote>
+
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+
+  </div>
+</body>
+
 </html>
 
 {% endblock %}

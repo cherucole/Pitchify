@@ -1,13 +1,13 @@
 {% extends 'base.html'%}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-          {% for single in comments %}
+{% for single in comments %}
 <div class="card">
   <div class="card-title">
     <h5>{{single.username}}</h5>
   </div>
   <div class="card-body">
-      <p>{{single.comment_content}}</p>
+    <p>{{single.comment_content}}</p>
   </div>
 </div>
 {% endfor %}

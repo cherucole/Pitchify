@@ -3,56 +3,50 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
-  </head>
-  <body>
+
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
   <div class="container">
-  <br>
     <br>
-
     <br>
-
-    <br>
-
-  <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
     <br>
     <br>
 
+    <button type="button" class="btn btn-outline-primary"><a href="/pitch/">New Pitch</a></button>
+    <br>
+    <br>
 
-   <div class="card border-secondary mb-3" style="max-width: 180rem;">
-   <div class="card-header"><h5>{{ pitch.pitch_title }}</h5>
+    <div class="card border-secondary mb-3" style="max-width: 180rem;">
+      <div class="card-header">
+        <h5>{{ pitch.pitch_title }}</h5>
+
+      </div>
+
+      <div class="card-body text-secondary">
+        <p class="card-text">{{pitch.pitch_content}}</p>
+        <p>Posted by {{pitch.username}}</p>
+
+        <p>{{pitch.comment_content}}</p>
+
+        <a href="/view/{{ pitch.id }}?vote=1" class="btn btn-primary">Upvote</a>
+
+        {{ pitch.likes }} Likes
+
+        <br>
+
+      </div>
+
+      <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
+
+    </div>
 
   </div>
 
-   <div class="card-body text-secondary">
-    <!--<h5 class="card-title">Secondary card title</h5>-->
-    <p class="card-text">{{pitch.pitch_content}}</p>
-       <p>Posted by {{pitch.username}}</p>
+</body>
 
-       <p>{{pitch.comment_content}}</p>
-
-       <a href="/view/{{ pitch.id }}?vote=1" class="btn btn-primary">Upvote</a>
-
-
-
-
-      {{ pitch.likes }} Likes
-
-
-
-
-   <br>
-
-  </div>
-
-            <footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.pitch_category}} </cite></footer>
-
-</div>
-
-</div>
-
-  </body>
 </html>
 
 {% endblock %}

@@ -4,8 +4,6 @@ from . import mail
 
 sender_email = 'moringamelissa254@gmail.com'
 
-
-
 def mail_message(subject,template,to,**kwargs):
 
     email = Message(subject, sender=sender_email, recipients=[to])
